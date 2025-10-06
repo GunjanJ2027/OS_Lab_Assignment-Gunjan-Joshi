@@ -1,0 +1,105 @@
+## Sample Output for Task 1
+
+$ python3 process_management.py --task1 3
+--- Running Task 1: Creating 3 Child Processes ---
+Parent Process PID: 14521
+Parent: Created child with PID: 14522
+Parent: Created child with PID: 14523
+Parent: Created child with PID: 14524
+  -> Child-1: My PID is 14522, My Parent's PID is 14521.
+Parent: Child 14522 has finished with status 0.
+  -> Child-2: My PID is 14523, My Parent's PID is 14521.
+Parent: Child 14523 has finished with status 0.
+  -> Child-3: My PID is 14524, My Parent's PID is 14521.
+Parent: Child 14524 has finished with status 0.
+Parent: All children have completed.
+
+--------------------------------------------------------------------------------
+
+## Sample Output for Task 2
+
+$ python3 process_management.py --task2 "ls -l" date "ps -f"
+--- Running Task 2: Executing Commands in Children ---
+Parent Process PID: 14580
+
+Child 14581: Executing 'ls -l'...
+total 24
+-rwxr-xr-x 1 user user 6808 Oct  6 08:00 process_management.py
+-rw-r--r-- 1 user user 1250 Oct  6 08:00 README.md
+...
+
+Child 14582: Executing 'date'...
+Mon Oct  6 08:02:15 IST 2025
+
+Child 14583: Executing 'ps -f'...
+UID          PID    PPID  C STIME TTY          TIME CMD
+user       14580   11234  0 08:02 pts/0    00:00:00 python3 process_management.py --task2 ls -l date ps -f
+user       14583   14580  0 08:02 pts/0    00:00:00 ps -f
+
+Parent: All commands executed by children.
+
+--------------------------------------------------------------------------------
+
+## Sample Output for Task 3 (Zombie)
+
+$ python3 process_management.py --zombie
+--- Running Task 3: Simulating a Zombie Process ---
+Parent (14610): I created a child (14611) but I will not wait for it.
+Parent: I am going to sleep for 30 seconds.
+>>> NOW, open a new terminal and run: ps -el | grep 'Z'
+>>> You should see a process with PID 14611 marked as <defunct>.
+Child (14611): I am alive but will exit immediately.
+
+# In another terminal during the 30s sleep:
+$ ps -el | grep 'Z'
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 Z  1000 14611 14610  0  80   0 -     0 -      pts/0    00:00:00 python3 <defunct>
+
+# After 30s, back in the original terminal:
+Parent: Woke up and reaped the child. The zombie is gone.
+
+--------------------------------------------------------------------------------
+
+## Sample Output for Task 4 (Inspecting PID of current shell)
+
+# First, get shell PID
+$ echo $$
+11234
+
+# Run the script
+$ python3 process_management.py --inspect 11234
+--- Running Task 4: Inspecting /proc for PID 11234 ---
+
+--- Reading /proc/11234/status ---
+Name:   bash
+State:  S (sleeping)
+Pid:    11234
+PPid:   11233
+VmSize:     12180 kB
+
+--- Reading /proc/11234/exe ---
+Executable Path: /usr/bin/bash
+
+--- Listing /proc/11234/fd ---
+Open File Descriptors (4):
+  FD 0: -> /dev/pts/0
+  FD 1: -> /dev/pts/0
+  FD 2: -> /dev/pts/0
+  FD 255: -> /dev/pts/0
+
+--------------------------------------------------------------------------------
+
+## Sample Output for Task 5
+
+$ python3 process_management.py --priority
+--- Running Task 5: Process Prioritization with nice() ---
+Creating 3 CPU-bound child processes with nice values: [19, 10, 0]
+The child with the lowest nice value (highest priority) should finish first.
+Child (PID 14835, Nice 19): Starting CPU-bound task.
+Child (PID 14836, Nice 10): Starting CPU-bound task.
+Child (PID 14837, Nice 0): Starting CPU-bound task.
+--> Child (PID 14837, Nice 0): FINISHED in 0.45s.
+--> Child (PID 14836, Nice 10): FINISHED in 0.78s.
+--> Child (PID 14835, Nice 19): FINISHED in 1.12s.
+
+Parent: All prioritized children have completed.
