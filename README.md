@@ -7,7 +7,7 @@ The project demonstrates core operating system concepts by simulating process ma
 # How to Run
 1. Clone the repository:
     ```bash
-    git clone <https://github.com/GunjanJ2027/OS_Lab_Assignment_1-Gunjan-Joshi>
+    git clone <https://github.com/GunjanJ2027/OS_Lab_Assignment-Gunjan-Joshi>
     cd <repository-folder>
     ```
 2.  Make the script executable
