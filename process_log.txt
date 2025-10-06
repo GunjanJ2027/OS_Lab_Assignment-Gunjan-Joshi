@@ -1,0 +1,12 @@
+2025-10-06 14:28:51,120 - MainProcess - System boot sequence initiated.
+2025-10-06 14:28:51,235 - MainProcess - Launched NetworkService.
+2025-10-06 14:28:51,236 - NetworkService - Service 'NetworkService' started.
+2025-10-06 14:28:51,341 - MainProcess - Launched DatabaseService.
+2025-10-06 14:28:51,342 - DatabaseService - Service 'DatabaseService' started.
+2025-10-06 14:28:51,452 - MainProcess - Launched LoggingService.
+2025-10-06 14:28:51,453 - LoggingService - Service 'LoggingService' started.
+2025-10-06 14:28:51,454 - MainProcess - All services launched. Main process is now waiting for them to complete.
+2025-10-06 14:28:53,845 - DatabaseService - Service 'DatabaseService' finished in 2.50 seconds.
+2025-10-06 14:28:54,555 - LoggingService - Service 'LoggingService' finished in 3.10 seconds.
+2025-10-06 14:28:54,938 - NetworkService - Service 'NetworkService' finished in 3.70 seconds.
+2025-10-06 14:28:54,939 - MainProcess - All services have completed. System is shutting down.
